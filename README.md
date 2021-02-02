@@ -150,7 +150,7 @@ Password: *****
 Saving token to file mdom.token
 ```
 
-Lists all top-level catalog containers
+List all top-level catalog containers
 ```
 $ # Using non-default token file
 $ dremio-rest -https -t=mdom.token -r=/api/v3/catalog
