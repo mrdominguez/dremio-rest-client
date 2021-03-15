@@ -10,7 +10,12 @@ Dremio REST API client
 [Sample Output](https://github.com/mrdominguez/dremio-rest-client/blob/master/README.md#sample-output)
 
 ## Release Notes
-### Version 1.0 is now available!
+### Version 1.1 is now available!
+- Added support for redirections
+
+Follow redirects is enabled by default. To disable, use `-noredirect`.
+
+### Version 1.0
 - Initial release of my Dremio REST client: `dremio-rest.pl`
 - All arguments are flag-based (see [Usage](https://github.com/mrdominguez/dremio-rest-client/blob/master/README.md#usage))
 - Improved readability of the JSON response content output by using **Data::Dumper**
@@ -93,7 +98,7 @@ The preference is as follows (highest first):
 ## Usage
 ```
 dremio-rest.pl [-help] [-version] [-d] [-u[=username]] [-p[=password]] [-https] [-host=hostname[:port]]
-	[-m=method] [-b=body_content] [-f=json_file] [-t] [-json] -login | -r=rest_resource
+	[-noredirect] [-m=method] [-b=body_content] [-f=json_file] [-t] [-json] -login | -r=rest_resource
 
 	 -help : Display usage
 	 -version : Display version information
@@ -103,6 +108,7 @@ dremio-rest.pl [-help] [-version] [-d] [-u[=username]] [-p[=password]] [-https] 
 		  Credentials file: $HOME/.dremio_rest (set env variables using colon-separated key/value pairs)
 	 -https : Use HTTPS to communicate with Dremio (default: HTTP)
 	 -host : Dremio hostname:port (default: localhost:9047)
+	 -noredirect : Do not follow redirects
 	 -m : Method | GET, POST, PUT, DELETE (default: GET)
 	 -b : Body content (JSON format)
 	 -f : JSON file containing body content
