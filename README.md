@@ -156,7 +156,7 @@ Password: *****
 Saving token to file mdom.token
 ```
 
-List all top-level catalog containers
+List top-level catalog containers
 ```
 $ # Using non-default token file
 $ dremio-rest -https -t=mdom.token -r=/api/v3/catalog
@@ -259,6 +259,83 @@ $VAR1 = {
                       'samples.dremio.com'
                     ],
           'id' => 'fd73f353-c449-475f-8e04-a67b27da56c1'
+        };
+```
+
+Query table and get results
+```
+$ dremio-rest -r=/api/v3/sql -m=post -b='{"sql":"select * from Samples.\"samples.dremio.com\".\"zips.json\" limit 1"}'
+$VAR1 = {
+          'id' => '1fbefb74-594a-90f7-564b-eb4374043400'
+        };
+$ dremio-rest -r=/api/v3/job/1fbefb74-594a-90f7-564b-eb4374043400
+$VAR1 = {
+          'queueName' => 'Low Cost User Queries',
+          'startedAt' => '2021-03-04T16:02:19.600Z',
+          'cancellationReason' => '',
+          'resourceSchedulingStartedAt' => '2021-03-04T16:02:19.619Z',
+          'rowCount' => 1,
+          'errorMessage' => '',
+          'resourceSchedulingEndedAt' => '2021-03-04T16:02:19.632Z',
+          'queueId' => 'ca9161e4-e470-4fe2-b03b-930b20c5e72e',
+          'jobState' => 'COMPLETED',
+          'queryType' => 'REST',
+          'endedAt' => '2021-03-04T16:02:20.303Z'
+        };
+$ dremio-rest -r=/api/v3/job/1fbefb74-594a-90f7-564b-eb4374043400/results
+$VAR1 = {
+          'rowCount' => 1,
+          'rows' => [
+                      {
+                        'city' => 'AGAWAM',
+                        '_id' => '01001',
+                        'loc' => [
+                                   '-72.622739',
+                                   '42.070206'
+                                 ],
+                        'pop' => 15338,
+                        'state' => 'MA'
+                      }
+                    ],
+          'schema' => [
+                        {
+                          'name' => 'city',
+                          'type' => {
+                                      'name' => 'VARCHAR'
+                                    }
+                        },
+                        {
+                          'name' => 'loc',
+                          'type' => {
+                                      'subSchema' => [
+                                                       {
+                                                         'type' => {
+                                                                     'name' => 'DOUBLE'
+                                                                   }
+                                                       }
+                                                     ],
+                                      'name' => 'LIST'
+                                    }
+                        },
+                        {
+                          'name' => 'pop',
+                          'type' => {
+                                      'name' => 'BIGINT'
+                                    }
+                        },
+                        {
+                          'name' => 'state',
+                          'type' => {
+                                      'name' => 'VARCHAR'
+                                    }
+                        },
+                        {
+                          'name' => '_id',
+                          'type' => {
+                                      'name' => 'VARCHAR'
+                                    }
+                        }
+                      ]
         };
 ```
 
