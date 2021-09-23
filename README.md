@@ -264,25 +264,26 @@ $VAR1 = {
 
 Query table and get results
 ```
-$ dremio-rest -r=/api/v3/sql -m=post -b='{"sql":"select * from Samples.\"samples.dremio.com\".\"zips.json\" limit 1"}'
+$ dremio-rest -r=/api/v3/sql -m=post \
+-b='{"sql":"select * from \"zips.json\" limit 1","context":["Samples","samples.dremio.com"]}'
 $VAR1 = {
-          'id' => '1fbefb74-594a-90f7-564b-eb4374043400'
+          'id' => '1fbefc28-dec1-9cbc-4f24-972d21e68500'
         };
-$ dremio-rest -r=/api/v3/job/1fbefb74-594a-90f7-564b-eb4374043400
+$ dremio-rest -r=/api/v3/job/1fbefc28-dec1-9cbc-4f24-972d21e68500
 $VAR1 = {
           'queueName' => 'Low Cost User Queries',
-          'startedAt' => '2021-03-04T16:02:19.600Z',
+          'startedAt' => '2021-03-04T15:59:18.480Z',
           'cancellationReason' => '',
-          'resourceSchedulingStartedAt' => '2021-03-04T16:02:19.619Z',
+          'resourceSchedulingStartedAt' => '2021-03-04T15:59:18.501Z',
           'rowCount' => 1,
           'errorMessage' => '',
-          'resourceSchedulingEndedAt' => '2021-03-04T16:02:19.632Z',
+          'resourceSchedulingEndedAt' => '2021-03-04T15:59:18.547Z',
           'queueId' => 'ca9161e4-e470-4fe2-b03b-930b20c5e72e',
           'jobState' => 'COMPLETED',
           'queryType' => 'REST',
-          'endedAt' => '2021-03-04T16:02:20.303Z'
+          'endedAt' => '2021-03-04T15:59:19.359Z'
         };
-$ dremio-rest -r=/api/v3/job/1fbefb74-594a-90f7-564b-eb4374043400/results
+$ dremio-rest -r=/api/v3/job/1fbefc28-dec1-9cbc-4f24-972d21e68500/results
 $VAR1 = {
           'rowCount' => 1,
           'rows' => [
@@ -341,7 +342,8 @@ $VAR1 = {
 
 Create, list and delete Personal Access Token (PAT)
 ```
-$ dremio-rest -https -m=post -b='{"label":"token2","millisecondsToExpire":"86400000"}' -r=/api/v3/user/admin/token
+$ dremio-rest -https -m=post \
+-b='{"label":"token2","millisecondsToExpire":"86400000"}' -r=/api/v3/user/admin/token
 nSOLFDEpQx2xTJxyS/xN7Gin/ZYzPM/bG7JQ5EES7v5RvFa1iTKmqC4+VAQ5+w==
 $ dremio-rest -https -r=/api/v3/user/mdom/token
 $VAR1 = {
@@ -362,7 +364,8 @@ $VAR1 = {
                       }
                     ]
         };
-$ dremio-rest -https -m=delete -r=/api/v3/user/admin/token/19499841-21d3-44cd-98f3-55e3cad10df8
+$ dremio-rest -https -m=delete \
+-r=/api/v3/user/admin/token/19499841-21d3-44cd-98f3-55e3cad10df8
 $ dremio-rest -https -r=/api/v3/user/mdom/token
 $VAR1 = {
           'data' => [
