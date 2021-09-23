@@ -188,7 +188,7 @@ $VAR1 = {
 
 Retrieve information about a specific catalog entity using its path
 ```
-$ # Using default token file .dremio_roken
+$ # Using default token file .dremio_token
 $ dremio-rest -https -r=/api/v3/catalog/by-path/Samples/samples.dremio.com
 $VAR1 = {
           'permissions' => [],
