@@ -12,6 +12,7 @@ Dremio REST API client
 ## Release Notes
 ### Version 1.1.1 is now available!
 - Added support for redirections
+- Resolved an issue with a conflicting method name (`decode_json`) when using the default `Dumper` output
 
 Follow redirects is enabled by default. To disable, use `-noredirect`.
 
