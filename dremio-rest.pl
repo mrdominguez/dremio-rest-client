@@ -204,7 +204,7 @@ while ( $url ) {
 		$is_json or print "No JSON format detected\n" if $d;
 		if ( $is_json && !$json ) {
 			use JSON::PP ();
-			$JSON::PP::true  = 'true';
+			$JSON::PP::true = 'true';
 			$JSON::PP::false = 'false';
 			my $decoded_json = JSON::PP::decode_json($response_content);
 			print Dumper $decoded_json;
