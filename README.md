@@ -2,22 +2,22 @@
 Dremio REST API client
 
 ### Table of Contents
-[Release Notes](https://github.com/mrdominguez/dremio-rest-client/blob/master/README.md#release-notes)  
-[Synopsis](https://github.com/mrdominguez/dremio-rest-client/blob/master/README.md#synopsis)  
-[Installation](https://github.com/mrdominguez/dremio-rest-client/blob/master/README.md#installation)  
-[Setting Credentials](https://github.com/mrdominguez/dremio-rest-client/blob/master/README.md#setting-credentials)  
-[Usage](https://github.com/mrdominguez/dremio-rest-client/blob/master/README.md#usage)  
-[Sample Output](https://github.com/mrdominguez/dremio-rest-client/blob/master/README.md#sample-output)
+[Release Notes](https://github.com/mrdominguez/dremio-rest-client/blob/main/README.md#release-notes)  
+[Synopsis](https://github.com/mrdominguez/dremio-rest-client/blob/main/README.md#synopsis)  
+[Installation](https://github.com/mrdominguez/dremio-rest-client/blob/main/README.md#installation)  
+[Setting Credentials](https://github.com/mrdominguez/dremio-rest-client/blob/main/README.md#setting-credentials)  
+[Usage](https://github.com/mrdominguez/dremio-rest-client/blob/main/README.md#usage)  
+[Sample Output](https://github.com/mrdominguez/dremio-rest-client/blob/main/README.md#sample-output)
 
 ## Release Notes
-### Version 1.1 is now available!
+### Version 1.1.1 is now available!
 - Added support for redirections
 
 Follow redirects is enabled by default. To disable, use `-noredirect`.
 
 ### Version 1.0
 - Initial release of my Dremio REST client: `dremio-rest.pl`
-- All arguments are flag-based (see [Usage](https://github.com/mrdominguez/dremio-rest-client/blob/master/README.md#usage))
+- All arguments are flag-based (see [Usage](https://github.com/mrdominguez/dremio-rest-client/blob/main/README.md#usage))
 - Improved readability of the JSON response content output by using **Data::Dumper**
 - Use `-login` to get a token from Dremio and save it to a file (implies `-t=default_token_file`)
 - Set `-t` to pass a token string or the path to a token file (default: `$HOME/.dremio_token`)
