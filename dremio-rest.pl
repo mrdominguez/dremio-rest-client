@@ -1,6 +1,6 @@
 #!/usr/bin/perl -ws
 
-# Copyright 2021 Mariano Dominguez
+# Copyright 2022 Mariano Dominguez
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,13 +29,13 @@ use vars qw($help $version $d $u $p $https $host $noredirect $m $b $f $t $json $
 if ( $version ) {
 	print "Dremio REST API client\n";
 	print "Author: Mariano Dominguez\n";
-	print "Version: 1.1\n";
-	print "Release date: 2021-03-15\n";
+	print "Version: 1.1.1\n";
+	print "Release date: 2022-12-08\n";
 	exit;
 }
 
 &usage if $help;
-die "Set -login or -r\nUse -help for options\n" unless ( $login || $r );
+die "Set -login or -r (REST resource|endpoint)\nUse -help for options\n" unless ( $login || $r );
 
 if ( $login ) {
 	my $dremio_cred_file = "$ENV{'HOME'}/.dremio_rest";
@@ -203,10 +203,10 @@ while ( $url ) {
 		$is_json = eval { from_json("$response_content"); 1 };
 		$is_json or print "No JSON format detected\n" if $d;
 		if ( $is_json && !$json ) {
-			#use JSON::PP qw(decode_json);
+			use JSON::PP ();
 			$JSON::PP::true  = 'true';
 			$JSON::PP::false = 'false';
-			my $decoded_json = decode_json($response_content);
+			my $decoded_json = JSON::PP::decode_json($response_content);
 			print Dumper $decoded_json;
 		} else {
 			print "$response_content\n";
