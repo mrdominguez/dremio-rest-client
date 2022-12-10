@@ -222,7 +222,7 @@ while ( $url ) {
 		open my $fh, '>', $token or die "Can't open file $token: $!\n";
 		print $fh $token_string;
 		close $fh;
-		print "Saved token to file $token\n";
+		print "Saved token to file: $token\n";
 	}
 }
 
