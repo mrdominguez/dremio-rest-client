@@ -146,7 +146,7 @@ $VAR1 = {
           'clusterId' => '8b184c48-1a29-42a4-a0b6-8cabc6393496',
           'expires' => '1612327001881'
         };
-Saving token to file /root/.dremio_token
+Saved token to file: /root/.dremio_token
 ```
 
 Get token passing credentials via command line
@@ -154,7 +154,7 @@ Get token passing credentials via command line
 $ dremio-rest -login -https -u=mdom -p -t=mdom.token -json
 Password: *****
 {"token":"gb3poqo35rr7akeodrah9lnpdu","userName":"mdom","firstName":"Mariano","expires":1612327143878,"userId":"mdom","admin":false,"clusterId":"8b184c48-1a29-42a4-a0b6-8cabc6393496","clusterCreatedAt":1605517486712,"showUserAndUserProperties":false,"version":"11.0.0-202011171636110752-16ab953d","permissions":{"canUploadProfiles":true,"canDownloadProfiles":true,"canEmailForSupport":true,"canChatForSupport":false},"userCreatedAt":0}
-Saving token to file mdom.token
+Saved token to file: mdom.token
 ```
 
 List top-level catalog containers
