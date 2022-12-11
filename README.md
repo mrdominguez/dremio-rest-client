@@ -10,11 +10,10 @@ Dremio REST API client
 [Sample Output](https://github.com/mrdominguez/dremio-rest-client/blob/main/README.md#sample-output)
 
 ## Release Notes
-### Version 1.1.1 is now available!
+### Version 1.2 is now available!
 - Resolved an issue with a conflicting method name (`decode_json`) when using the default `Dumper` output
-- Added support for redirections
-
-Follow redirects is enabled by default. To disable, use `-noredirect`.
+- Added `-noauth` option to skip using `Authorization` header in the HTTP request
+- Added support for redirections (Follow redirects is enabled by default. To disable, use `-noredirect`)
 
 ### Version 1.0
 - Initial release of my Dremio REST client: `dremio-rest.pl`
@@ -99,7 +98,7 @@ The preference is as follows (highest first):
 ## Usage
 ```
 dremio-rest.pl [-help] [-version] [-d] [-u[=username]] [-p[=password]] [-https] [-host=hostname[:port]]
-	[-noredirect] [-m=method] [-b=body_content] [-f=json_file] [-t] [-json] -login | -r=rest_resource
+	[-noredirect] [-noauth] [-rc] [-m=method] [-b=body_content] [-f=json_file] [-t] [-json] -login | -r=rest_resource
 
 	 -help : Display usage
 	 -version : Display version information
@@ -110,6 +109,8 @@ dremio-rest.pl [-help] [-version] [-d] [-u[=username]] [-p[=password]] [-https] 
 	 -https : Use HTTPS to communicate with Dremio (default: HTTP)
 	 -host : Dremio hostname:port (default: localhost:9047)
 	 -noredirect : Do not follow redirects
+	 -noauth : Do not add Authorization header
+	 -rc : Show HTTP response status codes
 	 -m : Method | GET, POST, PUT, DELETE (default: GET)
 	 -b : Body content (JSON format)
 	 -f : JSON file containing body content
