@@ -24,13 +24,13 @@ use JSON;
 use Data::Dumper;
 use IO::Prompter;
 
-use vars qw($help $version $d $u $p $https $host $noredirect $m $b $f $t $json $login $r);
+use vars qw($help $version $d $u $p $https $host $noredirect $noauth $rc $m $b $f $t $json $login $r);
 
 if ( $version ) {
 	print "Dremio REST API client\n";
 	print "Author: Mariano Dominguez\n";
-	print "Version: 1.1.1\n";
-	print "Release date: 2022-12-10\n";
+	print "Version: 1.1.2\n";
+	print "Release date: 2022-12-11\n";
 	exit;
 }
 
@@ -130,7 +130,7 @@ if ( $d && defined $body_content ) {
 	print "body_content = $body_content\n";
 }
 
-unless ( $login ) {
+unless ( $login || $noauth ) {
 	print "Token file " if $d;
 	
 	if ( -e $token ) {
@@ -212,10 +212,10 @@ while ( $url ) {
 			print "$response_content\n";
 		}
 	} else {
-		print "No response content\n" if $d;
+		print "No response content found\n" if $d;
 	}
 
-	print "The request did not succeed [HTTP RC = $http_rc]\n" if $http_rc !~ /2\d\d/;
+	print "[ HTTP response status code = $http_rc ]\n" if ( $rc || $http_rc !~ /2\d\d/ );
 
 	if ( ( $login || $t ) && $is_json && from_json($response_content)->{'token'} ) {
 		my $token_string = from_json($response_content)->{'token'};
@@ -228,7 +228,7 @@ while ( $url ) {
 
 sub usage {
 	print "\nUsage: $0 [-help] [-version] [-d] [-u[=username]] [-p[=password]] [-https] [-host=hostname[:port]]\n";
-	print "\t [-noredirect] [-m=method] [-b=body_content] [-f=json_file] [-t] [-json] -login | -r=rest_resource\n\n";
+	print "\t [-noredirect] [-noauth] [-rc] [-m=method] [-b=body_content] [-f=json_file] [-t] [-json] -login | -r=rest_resource\n\n";
 
 	print "\t -help : Display usage\n";
 	print "\t -version : Display version information\n";
@@ -239,6 +239,8 @@ sub usage {
 	print "\t -https : Use HTTPS to communicate with Dremio (default: HTTP)\n";
 	print "\t -host : Dremio hostname:port (default: localhost:9047)\n";
 	print "\t -noredirect : Do not follow redirects\n";
+	print "\t -noauth : Do not add Authorization header\n";
+	print "\t -rc : Show HTTP response status codes\n";
 	print "\t -m : Method | GET, POST, PUT, DELETE (default: GET)\n";
 	print "\t -b : Body content (JSON format)\n";
 	print "\t -f : JSON file containing body content\n";
