@@ -35,7 +35,7 @@ if ( $version ) {
 }
 
 &usage if $help;
-die "Set -login or -r (REST resource|endpoint)\nUse -help for options\n" unless ( $login || $r );
+die "Use -login or set -r (REST resource|endpoint)\nUse -help for options\n" unless ( $login || $r );
 
 if ( $login ) {
 	my $dremio_cred_file = "$ENV{'HOME'}/.dremio_rest";
