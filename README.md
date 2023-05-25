@@ -1,5 +1,6 @@
 # dremio-rest-client
-Dremio REST API client
+
+Dremio REST API client.
 
 ### Table of Contents
 [Release Notes](https://github.com/mrdominguez/dremio-rest-client/blob/main/README.md#release-notes)  
