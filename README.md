@@ -18,7 +18,7 @@ Dremio REST API client.
 
 ### Version 1.0
 - Initial release of the Dremio REST client: `dremio-rest-client.pl`
-- All arguments are flag-based (see [Usage](https://github.com/mrdominguez/dremio-rest-client/blob/main/README.md#usage))
+- All arguments are flag-based (see [usage](https://github.com/mrdominguez/dremio-rest-client/blob/main/README.md#usage))
 - Improved readability of the JSON response content output by using **Data::Dumper**
 - Use `-login` to get a token from Dremio and save it to a file (implies `-t=default_token_file`)
 - Set `-t` to pass a token string or the path to a token file (default: `$HOME/.dremio_token`)
