@@ -17,7 +17,7 @@ Dremio REST API client.
 - Added support for redirections (Follow redirects is enabled by default. To disable, use `-noredirect`)
 
 ### Version 1.0
-- Initial release of my Dremio REST client: `dremio-rest.pl`
+- Initial release of the Dremio REST client: `dremio-rest-client.pl`
 - All arguments are flag-based (see [Usage](https://github.com/mrdominguez/dremio-rest-client/blob/main/README.md#usage))
 - Improved readability of the JSON response content output by using **Data::Dumper**
 - Use `-login` to get a token from Dremio and save it to a file (implies `-t=default_token_file`)
@@ -53,7 +53,7 @@ cd; git clone https://github.com/mrdominguez/$REPOSITORY
 
 cd $REPOSITORY
 chmod +x *.pl
-ln -s dremio-rest.pl dremio-rest
+ln -s dremio-rest-client.pl dremio-rest-client
 
 cd; grep "PATH=.*$REPOSITORY" .bashrc || echo -e "\nexport PATH=\"\$HOME/$REPOSITORY:\$PATH\"" >> .bashrc
 
@@ -64,14 +64,14 @@ perl -MCPAN -e 'my $c = "CPAN::HandleConfig"; $c->load(doit => 1, autoconfig => 
 cpan CPAN::Meta::Requirements CPAN
 cpan Module::Metadata JSON REST::Client IO::Prompter
 
-dremio-rest -help
+dremio-rest-client -help
 echo "Run 'source ~/.bashrc' to refresh environment variables"
 ```
 
 ## Setting Credentials
 Dremio credentials can be passed by using the `-u` (username) and `-p` (password) options. The `-p` option can be set to the password string itself (**not recommended**) or to a file containing the password:
 
-`$ dremio-rest.pl -u=username -p=/path/to/password_file -host=dremio_host`
+`$ dremio-rest-client.pl -u=username -p=/path/to/password_file -host=dremio_host`
 
 Both username and password values are optional. If no value is provided, there will be a prompt for one.
 
@@ -98,7 +98,7 @@ The preference is as follows (highest first):
 
 ## Usage
 ```
-dremio-rest.pl [-help] [-version] [-d] [-u[=username]] [-p[=password]] [-https] [-host=hostname[:port]]
+dremio-rest-client.pl [-help] [-version] [-d] [-u[=username]] [-p[=password]] [-https] [-host=hostname[:port]]
 	[-noredirect] [-noauth] [-rc] [-m=method] [-b=body_content] [-f=json_file] [-t] [-json] -login | -r=rest_resource
 
 	 -help : Display usage
@@ -128,7 +128,7 @@ $ cat .dremio_rest
 DREMIO_REST_USER:admin
 DREMIO_REST_PASS:dremio123
 $
-$ dremio-rest -login -https
+$ dremio-rest-client -login -https
 $VAR1 = {
           'admin' => 'true',
           'firstName' => 'Admin',
@@ -153,7 +153,7 @@ Saved token to file: /root/.dremio_token
 
 Get token passing credentials via command line
 ```
-$ dremio-rest -login -https -u=mdom -p -t=mdom.token -json
+$ dremio-rest-client -login -https -u=mdom -p -t=mdom.token -json
 Password: *****
 {"token":"gb3poqo35rr7akeodrah9lnpdu","userName":"mdom","firstName":"Mariano","expires":1612327143878,"userId":"mdom","admin":false,"clusterId":"8b184c48-1a29-42a4-a0b6-8cabc6393496","clusterCreatedAt":1605517486712,"showUserAndUserProperties":false,"version":"11.0.0-202011171636110752-16ab953d","permissions":{"canUploadProfiles":true,"canDownloadProfiles":true,"canEmailForSupport":true,"canChatForSupport":false},"userCreatedAt":0}
 Saved token to file: mdom.token
@@ -162,7 +162,7 @@ Saved token to file: mdom.token
 List top-level catalog containers
 ```
 $ # Using non-default token file
-$ dremio-rest -https -t=mdom.token -r=/api/v3/catalog
+$ dremio-rest-client -https -t=mdom.token -r=/api/v3/catalog
 $VAR1 = {
           'data' => [
                       {
@@ -192,7 +192,7 @@ $VAR1 = {
 Retrieve information about a specific catalog entity using its path
 ```
 $ # Using default token file .dremio_token
-$ dremio-rest -https -r=/api/v3/catalog/by-path/Samples/samples.dremio.com
+$ dremio-rest-client -https -r=/api/v3/catalog/by-path/Samples/samples.dremio.com
 $VAR1 = {
           'permissions' => [],
           'entityType' => 'folder',
@@ -267,12 +267,12 @@ $VAR1 = {
 
 Query table and get results
 ```
-$ dremio-rest -r=/api/v3/sql -m=post \
+$ dremio-rest-client -r=/api/v3/sql -m=post \
 -b='{"sql":"select * from \"zips.json\" limit 1","context":["Samples","samples.dremio.com"]}'
 $VAR1 = {
           'id' => '1fbefc28-dec1-9cbc-4f24-972d21e68500'
         };
-$ dremio-rest -r=/api/v3/job/1fbefc28-dec1-9cbc-4f24-972d21e68500
+$ dremio-rest-client -r=/api/v3/job/1fbefc28-dec1-9cbc-4f24-972d21e68500
 $VAR1 = {
           'queueName' => 'Low Cost User Queries',
           'startedAt' => '2021-03-04T15:59:18.480Z',
@@ -286,7 +286,7 @@ $VAR1 = {
           'queryType' => 'REST',
           'endedAt' => '2021-03-04T15:59:19.359Z'
         };
-$ dremio-rest -r=/api/v3/job/1fbefc28-dec1-9cbc-4f24-972d21e68500/results
+$ dremio-rest-client -r=/api/v3/job/1fbefc28-dec1-9cbc-4f24-972d21e68500/results
 $VAR1 = {
           'rowCount' => 1,
           'rows' => [
@@ -345,10 +345,10 @@ $VAR1 = {
 
 Create, list and delete Personal Access Token (PAT)
 ```
-$ dremio-rest -https -m=post \
+$ dremio-rest-client -https -m=post \
 -b='{"label":"token2","millisecondsToExpire":"86400000"}' -r=/api/v3/user/admin/token
 nSOLFDEpQx2xTJxyS/xN7Gin/ZYzPM/bG7JQ5EES7v5RvFa1iTKmqC4+VAQ5+w==
-$ dremio-rest -https -r=/api/v3/user/mdom/token
+$ dremio-rest-client -https -r=/api/v3/user/mdom/token
 $VAR1 = {
           'data' => [
                       {
@@ -367,9 +367,9 @@ $VAR1 = {
                       }
                     ]
         };
-$ dremio-rest -https -m=delete \
+$ dremio-rest-client -https -m=delete \
 -r=/api/v3/user/admin/token/19499841-21d3-44cd-98f3-55e3cad10df8
-$ dremio-rest -https -r=/api/v3/user/mdom/token
+$ dremio-rest-client -https -r=/api/v3/user/mdom/token
 $VAR1 = {
           'data' => [
                       {
