@@ -33,7 +33,7 @@ FEEDBACK/BUGS: Please contact me by email.
 The Dremio REST client is a Perl script to interact with [Dremio](https://www.dremio.com/) via [REST API](https://docs.dremio.com/rest-api/)
 
 ## Installation
-This utility is written in *Perl* and have been tested using version *5.1x.x* on *RHEL 6/7*, as well as *macOS Sierra (10.12)* and after.
+This utility is written in Perl and have been tested using version 5.1x.x on RHEL 6/7, as well as macOS Sierra (10.12) and after.
 
 Use [cpan](http://perldoc.perl.org/cpan.html) to install the following modules; alternately, download them from the [CPAN Search Site](http://search.cpan.org/) for manual installation:
 - **REST::Client**
